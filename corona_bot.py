@@ -6,6 +6,18 @@ response = requests.get(URL).content
 soup = BeautifulSoup(response, 'html.parser')
 
 extract_contents = lambda row: [x.text.replace('\n', '') for x in row]
+extract_ith_row = lambda i: extract_contents(soup.find_all('tr')[i].find_all('td')) 
 
 header = extract_contents(soup.tr.find_all('th'))
-stats = extract_contents(soup.find_all('tr')[-1].find_all('td'))
+
+stats = []
+all_rows = soup.find_all('tr')
+for row in all_rows:
+    stat = extract_contents(row.find_all('td'))
+    if stat:
+        if len(stat) == 5:
+            # last row
+            stat = ['', *stat]
+        stats.append(stat)
+
+
