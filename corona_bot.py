@@ -1,5 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
+from tabulate import tabulate
+from slack_client import slacker
 
 URL = 'https://www.mohfw.gov.in/'
 response = requests.get(URL).content
@@ -20,4 +22,7 @@ for row in all_rows:
             stat = ['', *stat]
         stats.append(stat)
 
+table = tabulate(stats, headers=header, tablefmt='psql')
+slack_text = f'Please find CoronaVirus Summary for India below:\n```{table}```'
 
+slacker()(slack_text)
