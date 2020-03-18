@@ -1,4 +1,5 @@
 import requests
+import argparse
 from bs4 import BeautifulSoup
 from tabulate import tabulate
 from slack_client import slacker
@@ -15,6 +16,11 @@ def shorten_header(h):
 
 
 if __name__ == '__main__':
+   
+    parser  = argparse.ArgumentParser()
+    parser.add_argument('--states', default='haryana')
+    args = parser.parse_args()
+    interested_states = args.states.split(',')
     
     response = requests.get(URL).content
     soup = BeautifulSoup(response, 'html.parser')
@@ -29,7 +35,9 @@ if __name__ == '__main__':
             if len(stat) == 5:
                 # last row
                 stat = ['', *stat]
-            stats.append(stat)
+                stats.append(stat)
+            if any([s.lower() in stat[1].lower() for s in interested_states]):
+                stats.append(stat)
     
     table = tabulate(stats, headers=short_header, tablefmt='psql')
     slack_text = f'Please find CoronaVirus Summary for India below:\n```{table}```'
