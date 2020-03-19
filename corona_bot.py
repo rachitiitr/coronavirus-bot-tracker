@@ -8,7 +8,7 @@ from tabulate import tabulate
 from slack_client import slacker
 
 FORMAT = '[%(asctime)-15s] %(message)s'
-logging.basicConfig(format=FORMAT, level=logging.DEBUG, filename='bot.log', filemode='a')
+logging.basicConfig(format=FORMAT, level=logging.DEBUG, filename='~/bot.log', filemode='a')
 
 URL = 'https://www.mohfw.gov.in/'
 SHORT_HEADERS = ['Sno', 'State','In','Fr','Cd','Dt']
@@ -78,4 +78,5 @@ if __name__ == '__main__':
             slack_text = f'Please find CoronaVirus Summary for India below:\n```{table}```'
             slacker()(slack_text)
     except Exception as e:
+        logging.exception('oops, corono script failed.')
         slacker()(f'Exception occured: [{e}]')
