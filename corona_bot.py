@@ -8,7 +8,7 @@ from tabulate import tabulate
 from slack_client import slacker
 
 FORMAT = '[%(asctime)-15s] %(message)s'
-logging.basicConfig(format=FORMAT, level=logging.DEBUG)
+logging.basicConfig(format=FORMAT, level=logging.DEBUG, filename='bot.log', filemode='a')
 
 URL = 'https://www.mohfw.gov.in/'
 SHORT_HEADERS = ['Sno', 'State','In','Fr','Cd','Dt']
@@ -66,12 +66,14 @@ if __name__ == '__main__':
                 changed = True
                 logging.warning(f'Change for {state}:\n{past}->{cur}')
 
-        # override the latest one now
-        for state in cur_data:
-            cur_data[state]['latest'] = cur_data[state][current_time]
-        save(cur_data)
 
         if changed:
+            # override the latest one now
+            for state in cur_data:
+                past_data[state]['latest'] = cur_data[state][current_time]
+                past_data[state][current_time] = cur_data[state][current_time]
+            save(past_data)
+
             table = tabulate(stats, headers=SHORT_HEADERS, tablefmt='psql')
             slack_text = f'Please find CoronaVirus Summary for India below:\n```{table}```'
             slacker()(slack_text)
