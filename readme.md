@@ -1,6 +1,10 @@
 # CoronaVirus Bot for India (Covid19)
 
 ![Corona SlackBot by rachitiitr](https://i.ibb.co/8BmwQDs/corona-slack-bot.png)
+
+## YouTube Demo
+- Check the demo for how this works on YouTube [here](http://bit.ly/2UpI7ga).
+
 ## Features
 - Sit back and relax - the coronavirus updates will come to you.
 - Get Slack notifications (picture below)
