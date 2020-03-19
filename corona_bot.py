@@ -8,7 +8,7 @@ from tabulate import tabulate
 from slack_client import slacker
 
 FORMAT = '[%(asctime)-15s] %(message)s'
-logging.basicConfig(format=FORMAT, level=logging.DEBUG, filename='~/bot.log', filemode='a')
+logging.basicConfig(format=FORMAT, level=logging.DEBUG, filename='bot.log', filemode='a')
 
 URL = 'https://www.mohfw.gov.in/'
 SHORT_HEADERS = ['Sno', 'State','In','Fr','Cd','Dt']
