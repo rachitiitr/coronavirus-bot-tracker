@@ -1,4 +1,4 @@
-# Corona Bot for India 
+# CoronaVirus Bot for India (Covid19)
 
 ![Corona SlackBot by rachitiitr](https://i.ibb.co/8BmwQDs/corona-slack-bot.png)
 ## Features
@@ -10,6 +10,10 @@
   -  The new States entering the corona zone like Chattisgarh
 - Too many updates? Subscribe only to the states that you want.
 - Its reliable - the source of data is official Government site ([here](https://mohfw.gov.in/))
+- Its ROBUST! 
+  - What if script fails? What if the Govt website changes format?
+  - You get Slack notifications about the exceptions too.
+  - You have log files (check `bot.log`) too, to evaluate what went wrong
 - Don't like a feature? Change it! Raise a Pull Request too 😉
 
 
